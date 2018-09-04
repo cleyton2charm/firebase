@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">Usuarios</i><span class="cliente"></span></div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+        </ul>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+        <script>
+            $(document).ready(function(){    
+                
+               
+  
+        
+                //Insere dados na tabela com ID aleatório através do .push()
+                /*
+                var firebaseCliente = firebase.database().ref("usuario/-LHt0Htnw_QmlLRk_Yyi/pedido");
+                firebaseCliente.push().set({
+                    "codpagseguro" : "",
+                    "enderecodentrega" : {
+                    "entbairro" : "",
+                    "entcep" : "",
+                    "entcidade" : "",
+                    "entcomplemento" : "",
+                    "entestado" : "",
+                    "entlogradouro" : "",
+                    "entnumero" : ""
+                    },
+                    "entrega" : "",
+                    "extra" : "0",
+                    "frete" : "0",
+                    "produtos" : {
+                    "acessorios" : "1",
+                    "descricao" : "produto da melhor quelidade",
+                    "id" : "9",
+                    "produto" : "ESCORAS METÁLICAS",
+                    "quantidade" : "1",
+                    "valor" : "90.00"
+                    },
+                    "retirada" : "",
+                    "situacao" : "1",
+                    "status" : "1",
+                    "subtotal" : "0",
+                    "valor" : "0"
+                });
+                
+                //Atualiza o campo da tabela atraves do .ref() e .child()
+                var firebaseCliente = firebase.database().ref(7).child("FIELD2");
+                firebaseCliente.set("NIKI BENNER FIORETTI DE ARAUJO NEVES");
+
+                //Seleciona todos os campos da tabela de dados através do .ref() vazio
+                var firebaseClientes = firebase.database().ref();
+                firebaseClientes.on('child_added', snap => {
+                    var id = snap.child("FIELD1").val();
+                    var nome = snap.child("FIELD2").val(); 
+                    $('#cliente').append(id+": "+nome+"<br>");
+                });                
+                //Seleciona Posição e Campo especícifo da tabela de dados através do .ref() e .child() preenchidos
+                */ 
+                var firebaseCliente = firebase.database().ref('usuario');
+                firebaseCliente.on('value', function(snapshot) {
+                    console.log(snapshot.val())
+                    snapshot.forEach(function(childSnapshot) {
+                        $('.cliente').append(childSnapshot.val().nome+"<br>");
+                        var childKey = childSnapshot.key;
+                        var childData = childSnapshot.val().nome;
+                        var childPedido = childSnapshot.val().pedido;
+                        console.log(childPedido);                       
+                        // ...
+                    });
+                });
+                
+            });
+        </script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyALz4KmbCwiyjD2kkirCq5AOeoo_x9xA1I",
+            authDomain: "sherrer-b43e8.firebaseapp.com",
+            databaseURL: "https://sherrer-b43e8.firebaseio.com",
+            projectId: "sherrer-b43e8",
+            storageBucket: "sherrer-b43e8.appspot.com",
+            messagingSenderId: "864938110565"
+        };
+        firebase.initializeApp(config);
+        </script>
+
+    </body>
+  </html>
